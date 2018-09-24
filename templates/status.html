@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for p in position %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">Callsign: {{ p.callsign }}</a>
+                    <p class="article-content">Latitude: {{ p.latitude }}</p>
+                    <p class="article-content">Longitude: {{ p.longitude }}</p>
+                    <p class="article-content">Time stamp: {{ p.latitude }}</p>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
