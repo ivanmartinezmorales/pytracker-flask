@@ -4,19 +4,19 @@ from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
 
-############################ CONFIGURATIONS ##################################
+############################ CONFIGURATIONS ############################
 app = Flask(__name__)
 ## SECRET KEY
 app.config['SECRET_KEY'] = '4fe839481f42a8b603a8d5aa7223997b'
 
 
-############################## DATABASE SETUP ################################
+############################## DATABASE SETUP ##############################
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 
 ## TABLES
-class CallsignList(db.Model):
+class Callsign(db.Model):
     """
     All of our callsigns that we collected from the user in the beginning
     """
@@ -36,7 +36,7 @@ class BalloonPosition(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     altitude = db.Column(db.Float)
-    callsign = db.Column(db.String(10), db.ForeignKey('callsignlist.callsign'), nullable=False)
+    callsign = db.Column(db.String(10), db.ForeignKey('callsign.callsign'), nullable=False, primary_key=True)
 
     def __repr__(self):
         return f"""
@@ -51,8 +51,8 @@ class GroundStation(db.Model):
     """
     Collecting all of our ground station position data
     """
-    timestamp = db.Column(db.Float, nullable=False, default=datetime.utcnow)
-    latitude = db.Column(db.Float, )
+    timestamp = db.Column(db.Float, nullable=False, default=datetime.utcnow, primary_key=True)
+    latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     altitude = db.Column(db.Float)
 
