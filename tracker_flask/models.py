@@ -1,9 +1,12 @@
 from tracker_flask import db
 from datetime import datetime
 
-## TABLES
+
+## TABLES BOI ##
 class Callsign(db.Model):
     """
+    Callsign Table
+    ==============
     All of our callsigns that we collected from the user in the beginning
     """
     id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +18,8 @@ class Callsign(db.Model):
 
 class BalloonPosition(db.Model):
     """
+    BalloonPosition Table
+    =====================
     Every row shall contain timestamp, callsign, latitude, longitude, altitude
     """
     timestamp = db.Column(db.Float, nullable=False, default=datetime.utcnow)
@@ -36,6 +41,8 @@ class BalloonPosition(db.Model):
 
 class GroundStation(db.Model):
     """
+    Ground Station Table
+    ====================
     Collecting all of our ground station position data
     """
     timestamp = db.Column(db.Float, nullable=False, default=datetime.utcnow, primary_key=True)
