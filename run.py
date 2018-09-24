@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from tracker_flask import app
 
 
