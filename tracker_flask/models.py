@@ -1,19 +1,5 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import CallsignForm
-from flask_sqlalchemy import SQLAlchemy
-
+from tracker_flask import db
 from datetime import datetime
-
-############################ CONFIGURATIONS ############################
-app = Flask(__name__)
-## SECRET KEY
-app.config['SECRET_KEY'] = '4fe839481f42a8b603a8d5aa7223997b'
-
-
-############################## DATABASE SETUP ##############################
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
-
 
 ## TABLES
 class Callsign(db.Model):
@@ -45,7 +31,8 @@ class BalloonPosition(db.Model):
                         '{self.latitude}',
                         '{self.longitude}',
                         '{self.altitude}')
-                """
+                        """
+
 
 class GroundStation(db.Model):
     """
@@ -68,25 +55,4 @@ class GroundStation(db.Model):
                         '{self.altitude}',
                         '{self.pitch}',
                         {self.yaw}')
-                """
-
-################################# ROUTES #####################################
-@app.route("/")
-@app.route("/status")
-def home():
-    return render_template('status.html', position=position)
-
-
-@app.route("/collection", methods=['GET', 'POST'])
-def collection():
-    form = CallsignForm()
-    if form.validate_on_submit():
-        flash(f'Created objects for {form.Callsign.data}!', 'success')
-        return redirect(url_for('status'))
-    return render_template('callsigns.html', form=form)
-
-
-############################## EXECUTION ###################################
-
-if __name__ == "__main__":
-    app.run(debug=True)
+                        """
