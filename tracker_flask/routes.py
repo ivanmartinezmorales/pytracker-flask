@@ -24,6 +24,12 @@ def setup():
         return redirect(url_for('home'))
     return render_template('setup.html', title='setup callsigns', form=form)
 
+
 @app.route("/stop_collection")
 def stop_collection():
     pass
+
+
+@app.route('/start', methods=["GET", "POST"]
+def start():
+    return render_template('start.html', start=start)
